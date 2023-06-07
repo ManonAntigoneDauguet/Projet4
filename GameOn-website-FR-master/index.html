@@ -72,6 +72,7 @@
                   name="first"
                   minlength="2"
                   required
+                  oninvalid="return isInputValid('#first', 'Veuillez entrer 2 caractères ou plus pour le champ du prénom.')"
                 /><br>
               </div>
               <div
@@ -84,6 +85,7 @@
                   name="last"
                   minlength="2"
                   required
+                  oninvalid="return isInputValid('#last', 'Veuillez entrer 2 caractères ou plus pour le champ du nom.')"
                 /><br>
               </div>
               <div
@@ -95,6 +97,7 @@
                   id="email"
                   name="email"
                   required
+                  oninvalid="return isInputValid('#email', 'Veillez rentrer un mail valide.')"
                 /><br>
               </div>
               <div
@@ -105,6 +108,8 @@
                   type="date"
                   id="birthdate"
                   name="birthdate"
+                  required
+                  oninvalid="return isInputValid('#birthdate', 'Veillez entrer votre date de naissance.')"
                 /><br>
               </div>
               <div
@@ -117,7 +122,9 @@
                   name="quantity" 
                   min="0" 
                   max="99"
-                  required>
+                  required
+                  oninvalid="return isInputValid('#quantity', 'Veillez répondre à la question.')"
+                >
               </div>
               <p class="text-label">A quel tournoi souhaitez-vous participer cette année ?</p>
               <div
@@ -198,6 +205,7 @@
                   id="checkbox1"
                   name="checkbox1"
                   checked
+                  required
                 />
                 <label class="checkbox2-label" for="checkbox1">
                   <span class="checkbox-icon"></span>

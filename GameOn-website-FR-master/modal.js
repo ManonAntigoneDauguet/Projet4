@@ -58,3 +58,13 @@ function validate(event) {
     event.preventDefault();
   }
 }
+
+// errors messages on input modal
+function isInputValid(inputId, inputRecommendation) {
+  const input = document.querySelector(inputId);
+  if (input.validity.valueMissing) {
+    input.setCustomValidity(inputRecommendation);
+  } else {
+    input.setCustomValidity("");
+  }  
+}
