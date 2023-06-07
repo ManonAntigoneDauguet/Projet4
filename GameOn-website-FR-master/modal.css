@@ -206,6 +206,7 @@ label {
   font-weight: normal;
   display: inline-block;
   margin-bottom: 11px;
+  margin-top: 11px;
 }
 input {
   padding: 8px;
@@ -413,8 +414,9 @@ input[data-error]::after {
 }
 /* custom select end */
 .text-label {
+  font-size: 17px;
   font-weight: normal;
-  font-size: 16px;
+  margin-top: 11px;
 }
 .hero-section {
   min-height: 93vh;
