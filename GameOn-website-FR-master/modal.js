@@ -13,9 +13,6 @@ const modalBtn = document.querySelectorAll(".modal-btn");
 const formData = document.querySelectorAll(".formData");
 const closeBtn = document.querySelectorAll(".close");
 const locationInput = document.querySelectorAll('input[name="location"]');
-const locationInputDiv = document.querySelector('.locationInputs');
-const conditionsInput = document.querySelector("#checkbox1");
-const form = document.querySelector('form[name="reserve"]');
 
 // launch modal event
 modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
@@ -40,23 +37,7 @@ function isLocationSelected() {
       return true;
     }
   }
-  alert("Veillez choisir un tournois");
   return false;
-}
-
-// say if conditions-checkbox is checked
-function isConditionAccepted() {
-  if (conditionsInput.checked) {
-    return true;
-  } 
-  return false;
-}
-
-// validation modal form
-function validate(event) {
-  if (!isLocationSelected() || !isConditionAccepted()) {
-    event.preventDefault();
-  }
 }
 
 // errors messages on input modal
