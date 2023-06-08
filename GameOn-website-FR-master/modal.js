@@ -13,6 +13,8 @@ const modalBtn = document.querySelectorAll(".modal-btn");
 const formData = document.querySelectorAll(".formData");
 const closeBtn = document.querySelectorAll(".close");
 const locationInput = document.querySelectorAll('input[name="location"]');
+const queryString = window.location.search;
+const params = new URLSearchParams(queryString);
 
 // launch modal event
 modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
@@ -38,6 +40,13 @@ function isLocationSelected() {
     }
   }
   return false;
+}
+
+// validation message
+function validationMessage() {
+  if (params.get('first') != null) {
+    alert("Votre inscription a bien été prise en compte !");
+  }
 }
 
 // errors messages on input modal
