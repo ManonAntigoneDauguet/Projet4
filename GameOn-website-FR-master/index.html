@@ -11,7 +11,8 @@
       rel="stylesheet"
     />
   </head>
-  <body>
+  <body 
+    onload="validationMessage(event)">
     <div class="topnav" id="myTopnav">
       <div class="header-logo">
         <img alt="logo" src="Logo.png">
@@ -60,7 +61,6 @@
               name="reserve"
               action="index.html"
               method="get"
-              onsubmit="return validate(event);"
             >
               <div
                 class="formData">
