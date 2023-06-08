@@ -49,7 +49,7 @@ function isConditionAccepted() {
   if (conditionsInput.checked) {
     return true;
   } 
-  return false;   
+  return false;
 }
 
 // validation modal form
@@ -62,7 +62,7 @@ function validate(event) {
 // errors messages on input modal
 function isInputValid(inputName) {
   const input = document.querySelector(`#${inputName}`);
-  let inputRecommendation;
+  let inputRecommendation = "";
     switch (inputName) {
       case 'first':
         inputRecommendation = 'Veuillez entrer 2 caractères ou plus pour le champ du prénom.';
@@ -86,6 +86,14 @@ function isInputValid(inputName) {
 
       case 'checkbox1':
         inputRecommendation = 'Veillez accepter les termes et conditions d\'utilisation';
+        break;
+      
+      case 'location1':
+        if (isLocationSelected()) {
+          document.querySelector("#location1").removeAttribute("required");
+        } else {
+          inputRecommendation = "Veillez choisir un tournois";          
+        }
         break;
 
       default:
