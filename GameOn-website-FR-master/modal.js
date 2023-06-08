@@ -13,6 +13,7 @@ const modalBtn = document.querySelectorAll(".modal-btn");
 const formData = document.querySelectorAll(".formData");
 const closeBtn = document.querySelectorAll(".close");
 const locationInput = document.querySelectorAll('input[name="location"]');
+const locationInputDiv = document.querySelector('.locationInputs');
 const conditionsInput = document.querySelector("#checkbox1");
 const form = document.querySelector('form[name="reserve"]');
 
@@ -48,7 +49,6 @@ function isConditionAccepted() {
   if (conditionsInput.checked) {
     return true;
   } 
-  alert("Veillez accepter les conditions d'utilisation"); 
   return false;   
 }
 
@@ -60,11 +60,36 @@ function validate(event) {
 }
 
 // errors messages on input modal
-function isInputValid(inputId, inputRecommendation) {
-  const input = document.querySelector(inputId);
-  if (input.validity.valueMissing) {
-    input.setCustomValidity(inputRecommendation);
-  } else {
-    input.setCustomValidity("");
-  }  
+function isInputValid(inputName) {
+  const input = document.querySelector(`#${inputName}`);
+  let inputRecommendation;
+    switch (inputName) {
+      case 'first':
+        inputRecommendation = 'Veuillez entrer 2 caractères ou plus pour le champ du prénom.';
+        break;
+
+      case 'last':
+        inputRecommendation = 'Veuillez entrer 2 caractères ou plus pour le champ du nom.';
+        break;
+
+      case 'email':
+        inputRecommendation =  'Veillez rentrer un mail valide.';
+        break;
+
+      case 'birthdate':
+        inputRecommendation = 'Veillez entrer votre date de naissance.';
+        break;
+
+      case 'quantity':
+        inputRecommendation = 'Veillez répondre à la question.';
+        break;
+
+      case 'checkbox1':
+        inputRecommendation = 'Veillez accepter les termes et conditions d\'utilisation';
+        break;
+
+      default:
+        inputRecommendation = 'Veillez répondre à la question.';
+    }
+  input.setCustomValidity(inputRecommendation);
 }

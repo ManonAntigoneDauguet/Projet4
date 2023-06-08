@@ -239,6 +239,15 @@ input {
 .formData[data-error-visible="true"] .text-control {
   border: 2px solid #e54858;
 }
+.couple-input-label {
+  position: relative;
+  display: inline;
+}
+.locationInputs {
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: 20px;
+}
 /* 
 input[data-error]::after {
     content: attr(data-error);
@@ -283,7 +292,10 @@ input[data-error]::after {
   opacity: 0;
 }
 .checkbox-input {
-  display: none;
+  position: absolute;
+  opacity: 0;
+  left: 10px;
+  bottom: 0px;
 }
 .checkbox-input:checked + .checkbox-label .checkbox-icon::after,
 .checkbox-input:checked + .checkbox2-label .checkbox-icon::after {
