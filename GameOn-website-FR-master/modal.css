@@ -2,6 +2,8 @@
   --font-default: "DM Sans", Arial, Helvetica, sans-serif;
   --font-slab: var(--font-default);
   --modal-duration: 0.8s;
+  --primary-color: #ff0000;
+  --secondary-coor: #3876ac;
 }
 
 * {
@@ -58,23 +60,27 @@ img {
 }
 
 .topnav a:hover {
-  background-color: #ff0000;
+  background-color: var(--primary-color);
   color: #ffffff;
   border-radius: 15px;
 }
 
 .topnav a.active {
-  background-color: #ff0000;
+  background-color: var(--primary-color);
   color: #ffffff;
   border-radius: 15px;
 }
 
 .topnav .icon {
+  color: var(--primary-color);
   display: none;
   font-size: 33px;
 }
 
 @media screen and (max-width: 768px) {
+  .topnav {
+    margin-bottom: 5px;
+  }
   .topnav a {display: none;}
   .topnav a.icon {
     float: right;
@@ -88,8 +94,11 @@ img {
   }
 }
 
-@media screen and (max-width: 768px) {
-  .topnav.responsive {position: relative;}
+@media screen and (max-width: 768px) { 
+  /* responsive nav wrap, link to modal.js */
+  .topnav.responsive {
+    position: relative;
+  }
   .topnav.responsive .icon {
     position: absolute;
     right: 0;
@@ -114,7 +123,7 @@ img {
 main {
   font-size: 130%;
   font-weight: bolder;
-  color: black;
+  color: #000000;
   padding-top: 0.5vw;
   padding-left: 2vw;
   padding-right: 2vw;
@@ -125,7 +134,7 @@ main {
 
 .modal-btn {
   font-size: 145%;
-  background: #fe142f;
+  background: var(--primary-color);
   display: flex;
   margin: auto;
   padding: 2em;
@@ -136,7 +145,7 @@ main {
 }
 
 .modal-btn:hover {
-  background: #3876ac;
+  background: var(--secondary-coor);
 }
 
 .footer {
@@ -148,7 +157,7 @@ main {
 /* Modal form */
 
 .button {
-  background: #fe142f;
+  background: var(--primary-color);
   margin-top: 0.5em;
   padding: 1em;
   color: #fff;
@@ -158,7 +167,7 @@ main {
 }
 
 .button:hover {
-  background: #3876ac;
+  background: var(--secondary-coor);
 }
 
 .smFont {
@@ -357,7 +366,7 @@ input {
 
 .btn-submit,
 .btn-signup {
-  background: #fe142f;
+  background: var(--primary-color);
   display: block;
   margin: 0 auto;
   border-radius: 7px;
@@ -451,6 +460,7 @@ input {
   overflow: hidden;
   box-shadow: 0 2px 7px 2px rgba(0, 0, 0, 0.2);
   margin-bottom: 10px;
+  margin-top: 20px;
 }
 
 .hero-content {
@@ -514,7 +524,7 @@ input {
 }
 
 .copyrights {
-  color: #fe142f;
+  color: var(--primary-color);
   padding: 0;
   font-size: 1rem;
   margin: 60px 0 30px;
@@ -541,6 +551,7 @@ footer {
   .hero-section {
     display: block;
     box-shadow: unset;
+    margin-top: 0;
   }
   .hero-section .hero-text {
     margin-top: 37px;
