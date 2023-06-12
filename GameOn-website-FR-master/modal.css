@@ -344,6 +344,11 @@ input {
   opacity: 1;
   cursor: pointer;
   transform: scale(0.7);
+  border-radius: 7px;
+}
+
+.close:hover {
+  background-color: var(--secondary-coor);
 }
 
 .close:before,
