@@ -14,36 +14,36 @@ const modalBtn = document.querySelectorAll(".modal-btn");
 const formData = document.querySelectorAll(".formData");
 const formDataInputs = document.querySelectorAll(".formData input");
 const closeBtn = document.querySelectorAll(".close");
-const locationInput = document.querySelectorAll('input[name="location"]');
+const locationInputs = document.querySelectorAll('input[name="location"]');
 const conditionsInput = document.querySelector("#checkbox1");
 
-// launch modal event
+// launch modal (event)
 modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
 
-// launch modal form
+// launch modal (function)
 function launchModal() {
   modalbg.style.display = "block";
 }
 
-// close modal event
+// close modal (event)
 closeBtn.forEach((btn) => btn.addEventListener("click", closeModal));
 
-// close modal form
+// close modal (function)
 function closeModal() {
   modalbg.style.display = "none";
 }
 
-// say if a location is selected
+// say if a location is selected (function)
 function isLocationSelected() {
-  for (let i = 0; i < locationInput.length; i++) {
-    if (locationInput[i].checked) {
+  for (let i = 0; i < locationInputs.length; i++) {
+    if (locationInputs[i].checked) {
       return true;
     }
   }
   return false;
 }
 
-// say if conditions-checkbox is checked
+// say if conditions-checkbox is checked (function)
 function isConditionAccepted() {
   if (conditionsInput.checked) {
     return true;
@@ -51,12 +51,9 @@ function isConditionAccepted() {
   return false;   
 }
 
-// say if inputs are valide
-function isInputsValid() {
-  for (let i = 0; i < formDataInputs.length; i++) {
-    let input = formDataInputs[i];
-    let inputValue = input.value.trim(); 
-    console.log(inputValue);
+// say if an input is valide (function)
+function isInputValid(input) {
+  let inputValue = input.value.trim();
     if (inputValue === "") {
       return false;
     } 
@@ -68,68 +65,82 @@ function isInputsValid() {
         return false;
       }
     }
+  return true;
+}
+
+// say if all inputs are valide (function)
+function isAllInputsValid() {
+  for (let i = 0; i < formDataInputs.length; i++) {
+    let input = formDataInputs[i];
+    if (!isInputValid(input)) {
+      return false;
+    }
   }
   return true;
 }
 
-// validation message
+// validation message (function)
 function validate(event) {
   event.preventDefault();
-  if (isInputsValid() && isConditionAccepted() && isLocationSelected()) {
+  for (let i = 0; i < formDataInputs.length; i++) {
+    let formDataInput = formDataInputs[i];
+    letErrorMessage(formDataInput);
+  }
+  if (isAllInputsValid() && isConditionAccepted() && isLocationSelected()) {
     alert("Merci pour votre inscription !");
     closeModal();
-  } else {
-    alert("Le formulaire n'est pas valide");
   }
 }
 
-// errors messages on input modal
-// function letErrorMessages() {
-//   for (let i = 0; i < formDataInputs.length; i++) {
-//     let input = formDataInputs[i];
-//     let inputName = input.name;
-//     let inputValue = input.value; 
-//     let inputRecommendation = "";
-//     console.log(inputValue);
-//       switch (inputName) {
-//         case 'first':
-//           if (inputValue === "") {
-//             inputRecommendation = 'Veuillez entrer 2 caractères ou plus pour le champ du prénom.';            
-//           } 
-//           break;
+// error message on inputs (function)
+function letErrorMessage(input) {
+    let inputId = input.id;
+    let inputRecommendation = "";
+    switch (inputId) {
+      case 'first':
+        if (!isInputValid(input)) {
+          inputRecommendation = 'Veuillez entrer 2 caractères ou plus pour le champ du prénom.';  
+        }
+        break;
 
-//         case 'last':
-//           inputRecommendation = 'Veuillez entrer 2 caractères ou plus pour le champ du nom.';
-//           break;
+      case 'last':
+        if (!isInputValid(input)) {
+          inputRecommendation = 'Veuillez entrer 2 caractères ou plus pour le champ du nom.';
+        }
+        break;
 
-//         case 'email':
-//           inputRecommendation =  'Veillez rentrer un mail valide.';
-//           break;
+      case 'email':
+        if (!isInputValid(input)) {
+          inputRecommendation =  'Veillez rentrer un mail valide.';
+        }
+        break;
 
-//         case 'birthdate':
-//           inputRecommendation = 'Veillez entrer votre date de naissance.';
-//           break;
+      case 'birthdate':
+        if (!isInputValid(input)) {
+          inputRecommendation = 'Veillez entrer votre date de naissance.';
+        }
+        break;
 
-//         case 'quantity':
-//           inputRecommendation = 'Veillez répondre à la question.';
-//           break;
+      case 'quantity':
+        if (!isInputValid(input)) {
+          inputRecommendation = 'Veillez répondre à la question.';
+        }
+        break;
 
-//         case 'checkbox1':
-//           inputRecommendation = 'Veillez accepter les termes et conditions d\'utilisation';
-//           break;
-        
-//         case 'location':
-//           if (isLocationSelected()) {
-//             document.querySelector("#location1").removeAttribute("required");
-//           } else {
-//             inputRecommendation = "Veillez choisir un tournois";          
-//           }
-//           break;
+      case 'checkbox1':
+        if (!isConditionAccepted()) {
+          inputRecommendation = 'Veillez accepter les termes et conditions d\'utilisation';          
+        }
+        break;
+    } 
+    input.setCustomValidity(inputRecommendation);
+    input.reportValidity();
+}
 
-//         default:
-//           inputRecommendation = 'Veillez répondre à la question.';
-//       }
-//     input.setCustomValidity(inputRecommendation);
-//   }
-// }  
-
+// error message on inputs (event)
+for (let i = 0; i < formDataInputs.length; i++) {
+  let formDataInput = formDataInputs[i];
+  formDataInput.addEventListener('change', () => {
+    letErrorMessage(formDataInput);
+  });
+}
