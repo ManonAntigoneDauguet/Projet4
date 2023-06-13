@@ -52,14 +52,22 @@ function isConditionAccepted() {
 }
 
 // say if inputs are valide
-function isInputValid() {
+function isInputsValid() {
   for (let i = 0; i < formDataInputs.length; i++) {
     let input = formDataInputs[i];
-    let inputName = input.name;
-    let inputValue = input.value; 
+    let inputValue = input.value.trim(); 
+    console.log(inputValue);
     if (inputValue === "") {
       return false;
     } 
+    if (input.type == "text" && inputValue.length < 2) {
+      return false;
+    }
+    if (input.type == "number") {
+      if (inputValue < 0 || inputValue > 99) {
+        return false;
+      }
+    }
   }
   return true;
 }
@@ -67,7 +75,7 @@ function isInputValid() {
 // validation message
 function validate(event) {
   event.preventDefault();
-  if (isInputValid() && isConditionAccepted() && isLocationSelected()) {
+  if (isInputsValid() && isConditionAccepted() && isLocationSelected()) {
     alert("Merci pour votre inscription !");
     closeModal();
   } else {
