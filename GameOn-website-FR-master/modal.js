@@ -100,9 +100,9 @@ form.addEventListener("submit", (event) => {
 
 // error message on inputs (function)
 function letErrorMessage(input) {
-    let inputId = input.id;
+    let inputName = input.name;
     let inputRecommendation = "";
-    switch (inputId) {
+    switch (inputName) {
       case 'first':
         if (!isInputValid(input)) {
           inputRecommendation = 'Veuillez entrer 2 caractères ou plus pour le champ du prénom.';  
@@ -133,6 +133,16 @@ function letErrorMessage(input) {
         }
         break;
 
+      case 'location':
+        if (!isLocationSelected()) {
+          locationInputs[0].setCustomValidity('Veillez choisir un tournois');
+          locationInputs[0].reportValidity();
+        } else {
+          locationInputs[0].setCustomValidity("");
+          locationInputs[0].reportValidity();
+        }
+        break;
+       
       case 'checkbox1':
         if (!isConditionAccepted()) {
           inputRecommendation = 'Veillez accepter les termes et conditions d\'utilisation';          
