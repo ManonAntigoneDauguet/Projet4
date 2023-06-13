@@ -44,10 +44,10 @@ function isLocationSelected() {
 }
 
 // validation message
-function validationMessage() {
-  if (params.get('first') != null) {
-    alert("Votre inscription a bien été prise en compte !");
-  }
+async function validate(event) {
+  event.preventDefault();
+  alert("Merci pour votre inscription !");
+  closeModal();
 }
 
 // errors messages on input modal
