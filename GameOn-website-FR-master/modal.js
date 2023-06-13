@@ -1,3 +1,4 @@
+// responsive nav wrap
 function editNav() {
   var x = document.getElementById("myTopnav");
   if (x.className === "topnav") {
