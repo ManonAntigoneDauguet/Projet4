@@ -16,6 +16,7 @@ const formDataInputs = document.querySelectorAll(".formData input");
 const closeBtn = document.querySelectorAll(".close");
 const locationInputs = document.querySelectorAll('input[name="location"]');
 const conditionsInput = document.querySelector("#checkbox1");
+const form = document.querySelector('form[name="reserve"]');
 
 // launch modal (event)
 modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
@@ -81,7 +82,6 @@ function isAllInputsValid() {
 
 // validation message (function)
 function validate(event) {
-  event.preventDefault();
   for (let i = 0; i < formDataInputs.length; i++) {
     let formDataInput = formDataInputs[i];
     letErrorMessage(formDataInput);
@@ -91,6 +91,12 @@ function validate(event) {
     closeModal();
   }
 }
+
+// validation message (event)
+form.addEventListener("submit", (event) => {
+  event.preventDefault();
+  validate(event);
+})
 
 // error message on inputs (function)
 function letErrorMessage(input) {
