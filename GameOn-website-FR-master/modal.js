@@ -50,19 +50,25 @@ function isInputValid(input) {
     if (inputValue === "") {
       return false;
     } 
-    if (input.type == "text" && inputValue.length < 2) {
-      return false;
-    }
-    if (input.type == "number") {
-      if (inputValue < 0 || inputValue > 99) {
-        return false;
-      }
-    }
-    if (input.type == "email") {
-      let emailRegExp = new RegExp("[a-z._-]+@[a-z._-]+\\.[a-z._-]+")
-      if (!emailRegExp.test(inputValue)) {
-        return false;
-      }
+    switch(input.type) {
+      case 'text':
+        if (inputValue.length < 2) {
+          return false;
+        }
+        break;
+
+      case 'number':
+        if (inputValue < 0 || inputValue > 99) {
+          return false;
+        }    
+        break;    
+
+      case 'email':
+        let emailRegExp = new RegExp("[a-z._-]+@[a-z._-]+\\.[a-z._-]+")
+        if (!emailRegExp.test(inputValue)) {
+          return false;
+        }     
+        break;   
     }
   return true;
 }
@@ -82,7 +88,7 @@ function isAllInputsValid() {
 function validate(event) {
   for (let i = 0; i < formDataInputs.length; i++) {
     let formDataInput = formDataInputs[i];
-    if (!letErrorMessage(formDataInput)){
+    if (!showErrorMessage(formDataInput)){
       break;
     }
   }
@@ -99,7 +105,7 @@ form.addEventListener("submit", (event) => {
 })
 
 // error message on inputs (function)
-function letErrorMessage(input) {
+function showErrorMessage(input) {
     let inputName = input.name;
     let inputRecommendation = "";
     switch (inputName) {
@@ -158,6 +164,6 @@ function letErrorMessage(input) {
 for (let i = 0; i < formDataInputs.length; i++) {
   let formDataInput = formDataInputs[i];
   formDataInput.addEventListener('change', () => {
-    letErrorMessage(formDataInput);
+    showErrorMessage(formDataInput);
   });
 }
