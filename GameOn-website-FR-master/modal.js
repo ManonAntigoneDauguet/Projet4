@@ -44,14 +44,6 @@ function isLocationSelected() {
   return false;
 }
 
-// say if conditions-checkbox is checked (function)
-function isConditionAccepted() {
-  if (conditionsInput.checked) {
-    return true;
-  } 
-  return false;   
-}
-
 // say if an input is valide (function)
 function isInputValid(input) {
   let inputValue = input.value.trim();
@@ -63,6 +55,12 @@ function isInputValid(input) {
     }
     if (input.type == "number") {
       if (inputValue < 0 || inputValue > 99) {
+        return false;
+      }
+    }
+    if (input.type == "email") {
+      let emailRegExp = new RegExp("[a-z._-]+@[a-z._-]+\\.[a-z._-]+")
+      if (!emailRegExp.test(inputValue)) {
         return false;
       }
     }
@@ -84,9 +82,11 @@ function isAllInputsValid() {
 function validate(event) {
   for (let i = 0; i < formDataInputs.length; i++) {
     let formDataInput = formDataInputs[i];
-    letErrorMessage(formDataInput);
+    if (!letErrorMessage(formDataInput)){
+      break;
+    }
   }
-  if (isAllInputsValid() && isConditionAccepted() && isLocationSelected()) {
+  if (isAllInputsValid() && conditionsInput.checked && isLocationSelected()) {
     alert("Merci pour votre inscription !");
     closeModal();
   }
@@ -129,7 +129,7 @@ function letErrorMessage(input) {
 
       case 'quantity':
         if (!isInputValid(input)) {
-          inputRecommendation = 'Veillez répondre à la question.';
+          inputRecommendation = 'Veillez sélectionner un nombre en 1 et 99.';
         }
         break;
 
@@ -144,13 +144,14 @@ function letErrorMessage(input) {
         break;
        
       case 'checkbox1':
-        if (!isConditionAccepted()) {
+        if (!conditionsInput.checked) {
           inputRecommendation = 'Veillez accepter les termes et conditions d\'utilisation';          
         }
         break;
     } 
     input.setCustomValidity(inputRecommendation);
     input.reportValidity();
+    return inputRecommendation === "";
 }
 
 // error message on inputs (event)
