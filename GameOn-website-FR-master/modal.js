@@ -85,7 +85,7 @@ function isAllInputsValid() {
 }
 
 // validation message (function)
-function validate(event) {
+function validate() {
   for (let i = 0; i < formDataInputs.length; i++) {
     let formDataInput = formDataInputs[i];
     if (!showErrorMessage(formDataInput)){
@@ -101,7 +101,7 @@ function validate(event) {
 // validation message (event)
 form.addEventListener("submit", (event) => {
   event.preventDefault();
-  validate(event);
+  validate();
 })
 
 // error message on inputs (function)
