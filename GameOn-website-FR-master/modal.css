@@ -250,6 +250,24 @@ input {
   border: 2px solid #e54858;
 }
 
+.validationMessage {
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  font-family: var(--font-default);
+  position: relative;
+  height: 680px;
+}
+
+.validationMessage p {
+  position: absolute;
+  bottom: 340px;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 36px;
+  line-height: 142.6%;  
+}
+
 .couple-input-label {
   position: relative;
   display: inline;

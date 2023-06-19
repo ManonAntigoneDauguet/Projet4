@@ -11,12 +11,15 @@ function editNav() {
 // DOM Elements
 const modalbg = document.querySelector(".bground");
 const modalBtn = document.querySelectorAll(".modal-btn");
+const modalContent = document.querySelector(".modal-inputs");
 const formData = document.querySelectorAll(".formData");
 const formDataInputs = document.querySelectorAll(".formData input");
 const closeBtn = document.querySelectorAll(".close");
 const locationInputs = document.querySelectorAll('input[name="location"]');
 const conditionsInput = document.querySelector("#checkbox1");
 const form = document.querySelector('form[name="reserve"]');
+const validationMessage = document.querySelector(".validationMessage");
+const submitBtn = document.querySelector(".btn-submit");
 
 // launch modal (event)
 modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
@@ -93,8 +96,12 @@ function validate() {
     }
   }
   if (isAllInputsValid() && conditionsInput.checked && isLocationSelected()) {
-    alert("Merci pour votre inscription !");
-    closeModal();
+    modalContent.innerHTML = 
+      `<div class="validationMessage">
+        <p>Merci pour<br> votre inscription</p>
+      </div>`;
+    submitBtn.value = "Fermer";
+    submitBtn.addEventListener("click", closeModal);
   }
 }
 
