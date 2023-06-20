@@ -114,56 +114,69 @@ form.addEventListener("submit", (event) => {
 // error message on inputs (function)
 function showErrorMessage(input) {
     let inputName = input.name;
+    let recommendationSpace = document.querySelector(`.${inputName}`);
     let inputRecommendation = "";
     switch (inputName) {
       case 'first':
         if (!isInputValid(input)) {
           inputRecommendation = 'Veuillez entrer 2 caractères ou plus pour le champ du prénom.';  
+        } else {
+          recommendationSpace.setAttribute("data-error-visible", "false");
         }
         break;
 
       case 'last':
         if (!isInputValid(input)) {
           inputRecommendation = 'Veuillez entrer 2 caractères ou plus pour le champ du nom.';
+        } else {
+          recommendationSpace.setAttribute("data-error-visible", "false");
         }
         break;
 
       case 'email':
         if (!isInputValid(input)) {
           inputRecommendation =  'Veillez rentrer un mail valide.';
+        } else {
+          recommendationSpace.setAttribute("data-error-visible", "false");
         }
         break;
 
       case 'birthdate':
         if (!isInputValid(input)) {
           inputRecommendation = 'Veillez entrer votre date de naissance.';
+        } else {
+          recommendationSpace.setAttribute("data-error-visible", "false");
         }
         break;
 
       case 'quantity':
         if (!isInputValid(input)) {
           inputRecommendation = 'Veillez sélectionner un nombre en 1 et 99.';
+        } else {
+          recommendationSpace.setAttribute("data-error-visible", "false");
         }
         break;
 
       case 'location':
         if (!isLocationSelected()) {
-          locationInputs[0].setCustomValidity('Veillez choisir un tournois');
-          locationInputs[0].reportValidity();
+          inputRecommendation = 'Veillez choisir un tournois';
         } else {
-          locationInputs[0].setCustomValidity("");
-          locationInputs[0].reportValidity();
+          recommendationSpace.setAttribute("data-error-visible", "false");
         }
         break;
        
       case 'checkbox1':
         if (!conditionsInput.checked) {
           inputRecommendation = 'Veillez accepter les termes et conditions d\'utilisation';          
+        } else {
+          recommendationSpace.setAttribute("data-error-visible", "false");
         }
         break;
     } 
-    input.setCustomValidity(inputRecommendation);
-    input.reportValidity();
+    if (inputRecommendation !== "") {
+      recommendationSpace.setAttribute("data-error", inputRecommendation);
+      recommendationSpace.setAttribute("data-error-visible", "true");
+    }
     return inputRecommendation === "";
 }
 
