@@ -11,12 +11,15 @@ function editNav() {
 // DOM Elements
 const modalbg = document.querySelector(".bground");
 const modalBtn = document.querySelectorAll(".modal-btn");
+const modalContent = document.querySelector(".modal-inputs");
 const formData = document.querySelectorAll(".formData");
 const formDataInputs = document.querySelectorAll(".formData input");
 const closeBtn = document.querySelectorAll(".close");
 const locationInputs = document.querySelectorAll('input[name="location"]');
 const conditionsInput = document.querySelector("#checkbox1");
 const form = document.querySelector('form[name="reserve"]');
+const validationMessage = document.querySelector(".validationMessage");
+const submitBtn = document.querySelector(".btn-submit");
 
 // launch modal (event)
 modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
@@ -93,8 +96,12 @@ function validate() {
     }
   }
   if (isAllInputsValid() && conditionsInput.checked && isLocationSelected()) {
-    alert("Merci pour votre inscription !");
-    closeModal();
+    modalContent.innerHTML = 
+      `<div class="validationMessage">
+        <p>Merci pour<br> votre inscription</p>
+      </div>`;
+    submitBtn.value = "Fermer";
+    submitBtn.addEventListener("click", closeModal);
   }
 }
 
@@ -107,56 +114,69 @@ form.addEventListener("submit", (event) => {
 // error message on inputs (function)
 function showErrorMessage(input) {
     let inputName = input.name;
+    let recommendationSpace = document.querySelector(`.${inputName}`);
     let inputRecommendation = "";
     switch (inputName) {
       case 'first':
         if (!isInputValid(input)) {
           inputRecommendation = 'Veuillez entrer 2 caractères ou plus pour le champ du prénom.';  
+        } else {
+          recommendationSpace.setAttribute("data-error-visible", "false");
         }
         break;
 
       case 'last':
         if (!isInputValid(input)) {
           inputRecommendation = 'Veuillez entrer 2 caractères ou plus pour le champ du nom.';
+        } else {
+          recommendationSpace.setAttribute("data-error-visible", "false");
         }
         break;
 
       case 'email':
         if (!isInputValid(input)) {
           inputRecommendation =  'Veillez rentrer un mail valide.';
+        } else {
+          recommendationSpace.setAttribute("data-error-visible", "false");
         }
         break;
 
       case 'birthdate':
         if (!isInputValid(input)) {
           inputRecommendation = 'Veillez entrer votre date de naissance.';
+        } else {
+          recommendationSpace.setAttribute("data-error-visible", "false");
         }
         break;
 
       case 'quantity':
         if (!isInputValid(input)) {
           inputRecommendation = 'Veillez sélectionner un nombre en 1 et 99.';
+        } else {
+          recommendationSpace.setAttribute("data-error-visible", "false");
         }
         break;
 
       case 'location':
         if (!isLocationSelected()) {
-          locationInputs[0].setCustomValidity('Veillez choisir un tournois');
-          locationInputs[0].reportValidity();
+          inputRecommendation = 'Veillez choisir un tournois';
         } else {
-          locationInputs[0].setCustomValidity("");
-          locationInputs[0].reportValidity();
+          recommendationSpace.setAttribute("data-error-visible", "false");
         }
         break;
        
       case 'checkbox1':
         if (!conditionsInput.checked) {
           inputRecommendation = 'Veillez accepter les termes et conditions d\'utilisation';          
+        } else {
+          recommendationSpace.setAttribute("data-error-visible", "false");
         }
         break;
     } 
-    input.setCustomValidity(inputRecommendation);
-    input.reportValidity();
+    if (inputRecommendation !== "") {
+      recommendationSpace.setAttribute("data-error", inputRecommendation);
+      recommendationSpace.setAttribute("data-error-visible", "true");
+    }
     return inputRecommendation === "";
 }
 
