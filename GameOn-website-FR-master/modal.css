@@ -621,6 +621,16 @@ footer {
   .hero-headline {
     font-size: 3rem;
   }
+  .bground {
+    position: absolute;
+    top: 70px;
+    overflow: visible;
+    background-color: #ffffff;
+    height: 120%;
+  }
+  .content {
+    height: 100%;
+  }
 } 
 
 @keyframes modalopen {
